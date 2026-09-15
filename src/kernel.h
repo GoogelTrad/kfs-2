@@ -39,10 +39,12 @@ void terminal_initialize(void);
 void terminal_putchar(char c);
 void terminal_write(const char* data, uint32_t size);
 void terminal_writestring(const char* data);
+void print_stack(void);
 
 
 //helpers
 uint32_t strlen(const char* str);
 void *memset(void *bufptr, int value, uint32_t num);
+void printk(const char *str);
 
 #endif

@@ -36,7 +36,7 @@ docker run --rm -it -v "$(pwd)":/kfs "$IMAGE" make restart
 # --- Vérification du résultat
 if [ -f mykernel.iso ]; then
     echo ">>> mykernel.iso généré avec succès."
-    qemu-system-i386 -cdrom mykernel.iso -display default,show-cursor=on
+    qemu-system-i386 -cdrom mykernel.iso -display default,show-cursor=on -d cpu_reset
 else
     echo "!!! mykernel.iso introuvable, le build a échoué."
     exit 1

@@ -1,4 +1,5 @@
 #include "kernel.h"
+#include "gdt.h"
 
 uint32_t terminal_row;
 uint32_t terminal_column;
@@ -71,6 +72,7 @@ void terminal_writestring(const char* data)
 void kernel_main(void) 
 {
     terminal_initialize();
+    init_gdt();
 
     terminal_writestring("Welcome to KFS-1 from scratch!\n");
     terminal_writestring("System initialized successfully...\n");
@@ -79,6 +81,7 @@ void kernel_main(void)
     terminal_writestring("Done.\n\n");
     
     terminal_writestring("42\n");
+    print_stack();
 
     while (1) {
         // Halt state safely

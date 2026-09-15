@@ -18,6 +18,8 @@
 stack_bottom:
 .skip 16384 # Allocate 16 Kilobytes of stack space
 stack_top:
+.global stack_bottom
+.global stack_top
 
 # 3. Kernel Execution Entry Point
 .section .text
