@@ -74,7 +74,7 @@ void kernel_main(void)
     terminal_initialize();
     init_gdt();
 
-    terminal_writestring("Welcome to KFS-1 from scratch!\n");
+    terminal_writestring("Welcome to KFS-2 from scratch!\n");
     terminal_writestring("System initialized successfully...\n");
     terminal_writestring("-----------------------------------\n");
     terminal_writestring("Booting core context...\n");
