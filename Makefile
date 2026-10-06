@@ -45,6 +45,7 @@ restart: clean iso
 fclean: clean
 	rm -f $(NAME)
 	rm -f $(ISO_NAME)
+	docker system prune -a
 
 re: fclean all iso
 
