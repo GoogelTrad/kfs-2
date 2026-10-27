@@ -42,6 +42,36 @@ static void printk_hex(uint32_t value)
     printk(buffer);
 }
 
+extern void _start(void);
+
+/* Known functions, same addresses as `nm -n mykernel.bin` */
+static const struct {
+    void (*addr)(void);
+    const char *name;
+} symbols[] = {
+    { _start,      "_start" },
+    { kernel_main, "kernel_main" },
+    { level1,      "level1" },
+    { level2,      "level2" },
+    { print_stack, "print_stack" },
+};
+
+/* Returns the function containing address: the closest symbol at or below it */
+static const char *symbol_name(uint32_t address)
+{
+    const char *name = "???";
+    uint32_t best = 0;
+
+    for (uint32_t i = 0; i < sizeof(symbols) / sizeof(symbols[0]); i++) {
+        uint32_t start = (uint32_t)symbols[i].addr;
+        if (start <= address && start >= best) {
+            best = start;
+            name = symbols[i].name;
+        }
+    }
+    return name;
+}
+
 void print_stack(void)
 {
     uint32_t *frame;
@@ -62,8 +92,8 @@ void print_stack(void)
             return;
         }
 
-        printk("  #");
-        printk_hex(frame_number);
+        printk("  ");
+        printk(symbol_name(frame[1]));
         printk(" frame=");
         printk_hex(frame_address);
         printk(" return=");

@@ -28,6 +28,8 @@ stack_top:
 _start:
     # Initialize the Stack Pointer (%esp) register
     mov $stack_top, %esp
+    # %ebp = 0 marks the end of the frame chain for print_stack
+    xor %ebp, %ebp
 
     # Securely jump into our C entry point
     call kernel_main

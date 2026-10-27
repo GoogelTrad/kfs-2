@@ -68,6 +68,10 @@ void terminal_writestring(const char* data)
     terminal_write(data, len);
 }
 
+__attribute__((noinline)) void level2(void) { print_stack(); }
+__attribute__((noinline)) void level1(void) { level2(); }
+
+
 /* --- KERNEL ENTRY POINT --- */
 void kernel_main(void) 
 {
@@ -81,7 +85,7 @@ void kernel_main(void)
     terminal_writestring("Done.\n\n");
     
     terminal_writestring("42\n");
-    print_stack();
+    level1(); // Call the function that will eventually call print_stack()
 
     while (1) {
         // Halt state safely

@@ -40,6 +40,8 @@ void terminal_putchar(char c);
 void terminal_write(const char* data, uint32_t size);
 void terminal_writestring(const char* data);
 void print_stack(void);
+void level1(void);
+void level2(void);
 
 
 //helpers
